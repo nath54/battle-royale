@@ -9,3 +9,4 @@ Pour le lancer :
     -verifier que pygame est bien installer sur votre python
     -lancer le programme avec python : "python main.py"
 
+Pour le lancer, il vaut mieu utiliser python2, il y a quelques bugs en python3

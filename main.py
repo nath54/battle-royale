@@ -13,8 +13,8 @@ totpartiesjoues =int(sts[2][:-1])
 tottop1         =int(sts[3][:-1])
 pselec          =int(sts[4][:-1])
 aselec          =int(sts[5][:-1])
-mselec          =int(sts[6][:-1])
-record          =int(sts[7])
+mselec          =int(sts[6])
+
 pmenu=1
 
 
@@ -51,14 +51,14 @@ fenetre=pygame.display.set_mode((tetx,tety))
 
 
 def save_profil():
-    txt=str(pseudo)+"\n"+str(argent)+"\n"+str(totpartiesjoues)+"\n"+str(tottop1)+"\n"+str(pselec)+"\n"+str(aselec)+"\n"+str(mselec)+"\n"+str(record)
+    txt=str(pseudo)+"\n"+str(argent)+"\n"+str(totpartiesjoues)+"\n"+str(tottop1)+"\n"+str(pselec)+"\n"+str(aselec)+"\n"+str(mselec)
     f=open("profil.nath","w")
     f.write(txt)
     f.close()
 
 
 def aff():
-    button_menu1,button_menu2,button_menu3,button_play,b_record=pygame.Rect(1,1,1,1),pygame.Rect(1,1,1,1),pygame.Rect(1,1,1,1),pygame.Rect(1,1,1,1),pygame.Rect(1,1,1,1)
+    button_menu1,button_menu2,button_menu3,button_play=pygame.Rect(1,1,1,1),pygame.Rect(1,1,1,1),pygame.Rect(1,1,1,1),pygame.Rect(1,1,1,1)
     fenetre.fill((0,0,100))
     font=pygame.font.SysFont("Sherif",20)
     fon2=pygame.font.SysFont("Sherif",30)
@@ -101,13 +101,7 @@ def aff():
         fenetre.blit( fon2.render( "ARME 1 = "+anom[aselec]     , 20 , (250,250,250) ) , [ tetx-700 , tety - 420 ] )
         fenetre.blit( fon2.render( "ARME 2 = "+mnom[mselec]     , 20 , (250,250,250) ) , [ tetx-700 , tety - 320 ] )
         
-        
-        if record: crc=(20,100,20)
-        else     : crc=(100,20,20)
-        b_record=pygame.draw.rect(fenetre,crc,(tetx-500,150,400,100),0)
-        fenetre.blit( font.render( "RECORD" , 20 , (0,0,0) ) , [ tetx-450 , 170 ] )
-    
-    if pmenu == 2: #historique parties
+    if pmenu == 2:
         pygame.draw.rect(fenetre,(100,0  ,0 ),(800     ,50      ,400,70 ),5)
         try:
             hist=open("hist.nath","r").readlines()
@@ -165,14 +159,14 @@ def aff():
             if xx >= 1060: xx,yy=820,yy+80
 
     pygame.display.update()
-    return button_menu1,button_menu2,button_menu3,button_play,lprs,lam1,lam2,b_record
+    return button_menu1,button_menu2,button_menu3,button_play,lprs,lam1,lam2
 
 #button_play =pygame.Rect( tetx-500,tety-150,400,100 )
 #button_menu1=pygame.Rect( 400     ,70      ,400,70  )
 #button_menu2=pygame.Rect( 800     ,70      ,400,70  )
 
 while encour:
-    button_menu1,button_menu2,button_menu3,button_play,lprs,lam1,lam2,b_record=aff()
+    button_menu1,button_menu2,button_menu3,button_play,lprs,lam1,lam2=aff()
     for event in pygame.event.get():
         if   event.type == QUIT:
             exit()
@@ -187,9 +181,6 @@ while encour:
                     import subprocess
                     subprocess.Popen(["python","a.py"])
                     exit()
-                elif rectpose.colliderect(b_record) :
-                    if record: record=0
-                    else     : record=1
             elif pmenu == 3:
                 pp,aa,mm=0,0,0
                 for p in lprs:

@@ -4,8 +4,6 @@ from pygame.locals import *
 
 #####################################################################################################################################
 
-txtrecord=""
-
 fps=40
 
 tetx,tety=1300,1000
@@ -301,9 +299,9 @@ class Bullet:
                 except: error=True
             else:
                 a=random.randint(0,200)
-                print a,
+                print(a,)
                 if a <= 30:
-                    print a
+                    print(a)
                     perso.vie -= self.dg
                     if perso.vie <= 0:
                         encour=False
@@ -312,7 +310,7 @@ class Bullet:
                     pygame.display.update()
                     try   : del(blts[blts.index(self)])
                     except: error=True
-                print
+                print()
         except: error = True
 
 class Arme:
@@ -471,7 +469,7 @@ class Melee:
                         if perso.vie <= 0:
                             self.pos.tues+=1
                             del( prs[prs.index(perso)] )
-          except: print "error 1"
+          except: print("error 1")
         if   self.pos.sens == "Up"   : angl=0
         elif self.pos.sens == "Down" : angl=180
         elif self.pos.sens == "Left" : angl=90
@@ -652,8 +650,8 @@ def aff():
 
 
 def cm():
-    for x in range((-tmx/100),(tmx/100)):
-        for y in range((-tmy/100),(tmy/100)  ):
+    for x in range(int(-tmx/100),int(tmx/100)):
+        for y in range(int(-tmy/100),int(tmy/100)  ):
             mape.append( Om(x*50,y*50,0) )
 
     while len(mapeop) < 0:
@@ -680,28 +678,10 @@ def bb():
     for b in blts:
         b.bouger()
         b.detect()
-
-#format 
-
-def record_frame(txtrecord):
-    tx=""
-    for m in mapeop: tx+="{"+str(m.tp)+"|"+str(m.px)+"|"+str(m.py)+"|"+str(m.fx)+"|"+str(m.fy)+"|"+m.imgs[m.i]
-    tx+="!"
-    for m in prs:
-        if m.armsel == 0: gh , hg = m.arme.imgs[m.arme.i] , m.imgs[1]
-        else            : gh , hg = m.melee.imgs[0]       , m.imgs[0]
-        tx+="{"+str(m.tp)+"|"+str(m.px)+"|"+str(m.py)+"|"+str(m.fx)+"|"+str(m.fy)+"|"+str(m.cgc)+"|"+str(m.cfc)+"|"+str(m.armsel)+"|"+hg+"|"+m.sens
-    if perso.armsel == 0: gh,hg=perso.arme.imgs[perso.arme.i],perso.imgs[1]
-    else                : gh,hg=perso.melee.imgs[0],perso.imgs[0]
-    tx+="!"+str(perso.tp)+"|"+str(perso.px)+"|"+str(perso.py)+"|"+str(perso.fx)+"|"+str(perso.fy)+"|"+gh+"|"+hg+"|"+perso.sens+"\n"
-    txtrecord+=tx    
-      
-
 #####################################################################################################################################
 
 
 totnbpartiesjoues=open("profil.nath","r").readlines()[2][:-1]
-record=open("profil.nath","r").readlines()[7]
 
 pygame.init()
 
@@ -726,7 +706,6 @@ bm( [perso.fx-perso.px,perso.fy-perso.py] )
 inm=0
 
 while encour:
-#    if record: record_frame(txtrecord)
     for event in pygame.event.get():
         if   event.type == QUIT    : encour=False
         elif event.type == KEYDOWN :
@@ -777,10 +756,6 @@ pygame.display.update()
 
 ##########################################################################################################################################
 
-frec=open("records/partie"+totnbpartiesjoues+"nathgame","w")
-frec.write(txtrecord)
-frec.close()
-
 sts=open("profil.nath","r").readlines()
 pseudo          =sts[0][:-1]
 argent          =int(sts[1][:-1])
@@ -791,7 +766,7 @@ aselec          =int(sts[5][:-1])
 mselec          =int(sts[6])
 
 def save_profil():
-    txt=str(pseudo)+"\n"+str(argent)+"\n"+str(totpartiesjoues)+"\n"+str(tottop1)+"\n"+str(pselec)+"\n"+str(aselec)+"\n"+str(mselec)+"\n"+str(record)
+    txt=str(pseudo)+"\n"+str(argent)+"\n"+str(totpartiesjoues)+"\n"+str(tottop1)+"\n"+str(pselec)+"\n"+str(aselec)+"\n"+str(mselec)
     f=open("profil.nath","w")
     f.write(txt)
     f.close()
@@ -805,7 +780,7 @@ save_profil()
 
 f=open("hist.nath","a")
 ff="\n"+str(len(prs)+1)+"|"+str(perso.tues)+"|"+str(perso.tpp)+"|"+str(perso.cgc)+"|"+str(perso.cfc)
-#print ff
+#print(ff)
 f.write(ff)
 f.close()
 while encour2:
