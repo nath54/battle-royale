@@ -4,7 +4,7 @@ from pygame.locals import *
 
 #####################################################################################################################################
 
-fps=40
+fps=30
 
 tetx,tety=1300,1000
 
@@ -43,11 +43,14 @@ imgsa9=["a_9_up1.png","a_9_up2.png"]
 imgsa10=["a_10_up1.png","a_10_up2.png"]
 imgsa11=["a_11_up1.png","a_11_up2.png"]
 imgsa12=["a_12_up1.png","a_12_up2.png"]
+imgsa13=["a_13_up1.png","a_13_up2.png"]
 imgss1=["m_1_up1.png","m_1_up2.png"]
 imgss2=["m_2_up1.png","m_2_up2.png"]
 imgss3=["m_3_up1.png","m_3_up2.png"]
 imgss4=["m_4_up4.png","m_4_up4.png"]
 imgss5=["m_5_up4.png","m_5_up4.png"]
+imgss6=["m_6_up1.png","m_6_up2.png"]
+imgss7=["m_7_up1.png","m_7_up2.png"]
 
 anbal1=["bal1.png","bal2.png","bal3.png","bal4.png"]
 animband=["anim_b1.png","anim_b2.png","anim_b1.png","anim_b3.png" ]
@@ -70,36 +73,36 @@ ptxx=[50        ,50         ,50             ,50         ,50             ,50     
 ptyy=[50        ,50         ,50             ,50         ,50             ,50     ,50         ,50         ,50             ,50             ]
 pnim=[[]        ,[]         ,[]             ,[]         ,anicap         ,[]     ,animcpel   ,animce     ,animvche       ,animband       ]
 
-atpp=[0             ,1          ,2              ,3              ,4              ,5              ,6                      ,7          ,8              ,9              ,10                 ,11         ]
-anom=["pistolet"    ,"biochoc45","arbalette"    ,"sniper"       ,"lanscoeur"    ,"bazooka"      ,"super mitrailleuse"   ,"tronelec" ,"lancepatate"  ,"l'arc"        ,"Le double bazooka","Trazor"   ]
-attr=[0.4           ,1.7        ,2              ,4              ,2              ,3              ,0                      ,1          ,1.7            ,1.2            ,2.5                ,0.5        ]
-abcl=[(20,20,20)    ,(10,250,10),(0,0,0)        ,(10,10,110)    ,(0,0,0)        ,(0,0,0)        ,(40,40,40)             ,(0,0,0)    ,(0,0,0)        ,(0,0,0)        ,(121,154,21)       ,(210,15,15)]
-abce=[(200,250,50)  ,(50,90,140),(250,0,0)      ,(200,250,50)   ,(250,20,60)    ,(200,250,50)   ,(200,250,50)           ,(0,50,250) ,(150,160,20)   ,(150,0,0)      ,(121,154,21)       ,(210,15,15)]
-abte=[6             ,150        ,4              ,4              ,30             ,120            ,5                      ,75         ,99             ,4              ,150                ,55         ]
-abvt=[15            ,30         ,45             ,40             ,30             ,30             ,40                     ,20         ,20             ,50             ,30                 ,55         ]
-abfr=[2             ,1          ,1              ,2              ,2              ,2              ,2                      ,1          ,1              ,1              ,1                  ,1          ]
-abdg=[100           ,2000       ,1000           ,2200           ,500            ,1600           ,50                     ,999        ,3000           ,1111           ,1650               ,555        ]
-abtx=[6             ,30         ,10             ,4              ,11             ,30             ,3                      ,20         ,25             ,10             ,30                 ,15         ]
-abty=[5             ,50         ,5              ,3              ,9              ,20             ,3                      ,20         ,25             ,5              ,20                 ,15         ]
-abds=[500           ,800        ,1500           ,2000           ,650            ,400            ,1400                   ,2000       ,150            ,3000           ,400                ,555        ]
-abtp=[1             ,3          ,2              ,1              ,2              ,2              ,1                      ,3          ,2              ,2              ,2                  ,3          ]
-abim=["rien.png"    ,"rien.png" ,"fleche.png"   ,"rien.png"     ,"coeur.png"    ,"roquette.png" ,"rien.png"             ,"rien.png" ,"patate.png"   ,"fleche.png"   ,"roquette.png"     ,"rien.png" ]
-anim=[[]            ,animbio    ,[]             ,[]             ,[]             ,[]             ,[]                     ,animelct   ,[]             ,[]             ,[]                 ,anbal1     ]
-aimg=[imgsa1        ,imgsa2     ,imgsa3         ,imgsa4         ,imgsa5         ,imgsa6         ,imgsa7                 ,imgsa8     ,imgsa9         ,imgsa10        ,imgsa11            ,imgsa12    ]
-atxx=[50            ,50         ,50             ,50             ,50             ,50             ,50                     ,50         ,50             ,50             ,50                 ,50         ]
-atyy=[50            ,50         ,50             ,50             ,50             ,50             ,50                     ,50         ,50             ,50             ,50                 ,50         ]
+atpp=[0             ,1          ,2              ,3              ,4              ,5              ,6                      ,7          ,8              ,9              ,10                 ,11         ,12         ]
+anom=["pistolet"    ,"biochoc45","arbalette"    ,"sniper"       ,"lanscoeur"    ,"bazooka"      ,"super mitrailleuse"   ,"tronelec" ,"lancepatate"  ,"l'arc"        ,"Le double bazooka","Trazor"   ,"la lance" ]
+attr=[0.4           ,1.7        ,2              ,4              ,2              ,3              ,0                      ,1          ,1.7            ,1.2            ,2.5                ,0.5        ,1.5        ]
+abcl=[(20,20,20)    ,(10,250,10),(0,0,0)        ,(10,10,110)    ,(0,0,0)        ,(0,0,0)        ,(40,40,40)             ,(0,0,0)    ,(0,0,0)        ,(0,0,0)        ,(121,154,21)       ,(210,15,15),(210,15,15)]
+abce=[(200,250,50)  ,(50,90,140),(250,0,0)      ,(200,250,50)   ,(250,20,60)    ,(200,250,50)   ,(200,250,50)           ,(0,50,250) ,(150,160,20)   ,(150,0,0)      ,(121,154,21)       ,(210,15,15),(210,15,15)]
+abte=[6             ,150        ,4              ,4              ,30             ,120            ,5                      ,75         ,99             ,4              ,150                ,55         ,5          ]
+abvt=[15            ,30         ,45             ,40             ,30             ,30             ,40                     ,20         ,20             ,50             ,30                 ,55         ,20         ]
+abfr=[2             ,1          ,1              ,2              ,2              ,2              ,2                      ,1          ,1              ,1              ,1                  ,1          ,1          ]
+abdg=[100           ,2000       ,1000           ,2200           ,500            ,1600           ,50                     ,999        ,3000           ,1111           ,1650               ,555        ,505        ]
+abtx=[6             ,30         ,10             ,4              ,11             ,30             ,3                      ,20         ,25             ,10             ,30                 ,15         ,5          ]
+abty=[5             ,50         ,5              ,3              ,9              ,20             ,3                      ,20         ,25             ,5              ,20                 ,15         ,15         ]
+abds=[500           ,800        ,1500           ,2000           ,650            ,400            ,1400                   ,2000       ,150            ,3000           ,400                ,555        ,500        ]
+abtp=[1             ,3          ,2              ,1              ,2              ,2              ,1                      ,3          ,2              ,2              ,2                  ,3          ,2          ]
+abim=["rien.png"    ,"rien.png" ,"fleche.png"   ,"rien.png"     ,"coeur.png"    ,"roquette.png" ,"rien.png"             ,"rien.png" ,"patate.png"   ,"fleche.png"   ,"roquette.png"     ,"rien.png" ,"lance.png"]
+anim=[[]            ,animbio    ,[]             ,[]             ,[]             ,[]             ,[]                     ,animelct   ,[]             ,[]             ,[]                 ,anbal1     ,[]         ]
+aimg=[imgsa1        ,imgsa2     ,imgsa3         ,imgsa4         ,imgsa5         ,imgsa6         ,imgsa7                 ,imgsa8     ,imgsa9         ,imgsa10        ,imgsa11            ,imgsa12    ,imgsa13    ]
+atxx=[50            ,50         ,50             ,50             ,50             ,50             ,50                     ,50         ,50             ,50             ,50                 ,50         ,50         ]    
+atyy=[50            ,50         ,50             ,50             ,50             ,50             ,50                     ,50         ,50             ,50             ,50                 ,50         ,50         ]
 #forme 1 = rectangulaire , forme 2 = rond
 
-stpp=[0         ,1              ,2                      ,3          ,4              ]
-snom=["poignard","sabre laser"  ,"baton de montagnard"  ,"Spelectr" ,"Tronsonneuse" ]
-sttr=[0.5       ,0.5            ,0.7                    ,0.8        ,1.2            ]
-simg=[imgss1    ,imgss2         ,imgss3                 ,imgss4     ,imgss5         ]
-snim=[[]        ,[]             ,[]                     ,animepee   ,animtron       ]
-sdeg=[400       ,800            ,100                    ,999        ,800            ]
-sprt=[30        ,55             ,45                     ,70         ,50             ]
-stxx=[50        ,50             ,50                     ,50         ,50             ]
-styy=[50        ,50             ,50                     ,50         ,50             ]
-stpt=[1         ,1              ,1                      ,2          ,2              ]
+stpp=[0         ,1              ,2                      ,3          ,4              ,5          ,6      ]
+snom=["poignard","sabre laser"  ,"baton de montagnard"  ,"Spelectr" ,"Tronsonneuse" ,"la lance" ,"l'epee"]
+sttr=[0.5       ,0.5            ,0.7                    ,0.8        ,1.2            ,0.9        ,1      ]
+simg=[imgss1    ,imgss2         ,imgss3                 ,imgss4     ,imgss5         ,imgss6     ,imgss7 ]
+snim=[[]        ,[]             ,[]                     ,animepee   ,animtron       ,[]         ,[]     ]
+sdeg=[400       ,800            ,100                    ,999        ,800            ,686        ,1500   ]
+sprt=[30        ,55             ,45                     ,70         ,50             ,80         ,70     ]
+stxx=[50        ,50             ,50                     ,50         ,50             ,50         ,50     ]
+styy=[50        ,50             ,50                     ,50         ,50             ,50         ,50     ]
+stpt=[1         ,1              ,1                      ,2          ,2              ,1          ,1      ]
 
 
 mtpp=[0            ,1                                   ]
@@ -660,6 +663,7 @@ def cm():
             for m in mapeop:
                 if abs(m.px-wx) >= 150 and abs(m.py-wy) >= 150: mapeop.append( Om(wx,wy,1) )
         else: mapeop.append( Om(wx,wy,1) )
+    
     for x in range(nbprs-1):
         prs.append( Perso(random.randint(-tmx/2,tmx/2),random.randint(-tmy/2,tmy/2),random.choice(ptpp),False,0) )
     return mape,mapeop,prs
