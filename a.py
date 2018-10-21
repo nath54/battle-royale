@@ -4,15 +4,23 @@ from pygame.locals import *
 
 #####################################################################################################################################
 
+pygame.init()
+
 fps=30
+fpss=0
+vanime=0.1
+dtan=time.time()
+vb=0.4
+dvb=time.time()
 
 tetx,tety=1300,1000
 
 nbprs=50
-tmx,tmy=40*100,40*100
+tmx,tmy=4*1000,4*1000
 
 affcarte=True
 affstats=True
+pause=False
 
 encour=True
 
@@ -68,6 +76,7 @@ pnom=["Clyde"   ,"Linconu"  ,"Lesprideglace","Fantom"   ,"Le montagnard","Legro"
 pvie=[1000      ,900        ,1500           ,600        ,1000           ,5000   ,1700       ,980        ,1500           ,1450           ]
 pres=[10        ,35         ,15             ,0          ,40             ,150    ,40         ,21         ,5              ,10             ]
 pvit=[15        ,25         ,20             ,20         ,18             ,6      ,19         ,15         ,23             ,24             ]
+pvrg=[1         ,1.5        ,0.9            ,0.5        ,1.2            ,5      ,0.8        ,1.5        ,3              ,2              ]
 pimg=[imgsp1    ,imgsp2     ,imgsp3         ,imgsp4     ,imgsp5         ,imgsp6 ,imgsp7     ,imgsp8     ,imgsp9         ,imgsp10        ]
 ptxx=[50        ,50         ,50             ,50         ,50             ,50     ,50         ,50         ,50             ,50             ]
 ptyy=[50        ,50         ,50             ,50         ,50             ,50     ,50         ,50         ,50             ,50             ]
@@ -107,8 +116,8 @@ stpt=[1         ,1              ,1                      ,2          ,2          
 
 mtpp=[0            ,1                                   ]
 mnom=["herbe"      ,"arbre"                             ]
-mtxx=[100          ,50                                  ]
-mtyy=[100          ,50                                  ]
+mtxx=[1000         ,50                                  ]
+mtyy=[1000         ,50                                  ]
 mpmd=[True         ,False                               ]
 mimg=[["herbe.png"],["arbre_1_1.png","arbre_1_2.png"]   ]
 
@@ -159,7 +168,7 @@ class Om():
         self.imgs    = mimg[tp]
         self.i       = 0
         self.imgactu = self.imgs[self.i]
-        self.img     = pygame.image.load("images/"+self.imgactu)
+        self.img     = pygame.transform.scale( pygame.image.load("images/"+self.imgactu) , [self.tx,self.ty])
         self.pmd     = mpmd[tp]
     def anim(self):
         if self.i >= len(self.imgs)-1:
@@ -167,7 +176,7 @@ class Om():
         else: self.i+=1
         if self.imgs.index( self.imgactu ) != self.i:
             self.imgactu=self.imgs[self.i]
-            self.img    =pygame.image.load("images/"+self.imgactu)
+            self.img    =pygame.transform.scale( pygame.image.load("images/"+self.imgactu) , [self.tx,self.ty])
 
 def explose(bb,prs,mapeop):
     cabre(bb)
@@ -489,6 +498,7 @@ class Perso:
         self.vietot = self.vie
         self.resist = pres[tp]
         self.vit    = pvit[tp]
+        self.vitreg = pvrg[tp]
         self.imgs   = pimg[tp]
         self.i      = 4
         self.img    = pygame.image.load("images/"+self.imgs[0])
@@ -511,6 +521,7 @@ class Perso:
         self.i      = 0 
         self.bop    = bop
         self.tues   = 0
+        self.drg    = time.time()
         # False = bot , True = player
     
     def bouger(self,aa):
@@ -557,15 +568,25 @@ class Perso:
             self.img            = pygame.transform.rotate( pygame.image.load("images/"+self.imgs[0])       , self.i)
             self.melee.img      = pygame.transform.rotate( pygame.image.load("images/"+self.melee.imgs[0]) , self.i)
 
-def aff():
+cx=tetx-150
+cy=20
+
+fon=pygame.font.SysFont("Comic Sans MS",20)
+def aff():  
+  #t1=time.time()
+  if not pause:
+    dtan=time.time()
     fenetre.fill((0,0,0))
+    
     for o in mape:
         if o.fx >= 0-o.tx and o.fy >= 0-o.ty and o.fx <= tetx and o.fy <= tety:
             fenetre.blit(o.img,[o.fx,o.fy])
+    
     for o in mapeop:
         if o.fx >= 0-o.tx and o.fy >= 0-o.ty and o.fx <= tetx and o.fy <= tety:
             fenetre.blit(o.img,[o.fx,o.fy])
-        o.anim()
+            o.anim()
+    
     for o in prs:
         if o.fx >= 0-o.tx and o.fy >= 0-o.ty and o.fx <= tetx and o.fy <= tety:
             if perso.tp == 8:
@@ -586,7 +607,7 @@ def aff():
                 fenetre.blit( pygame.transform.rotate( pygame.image.load("images/"+o.imganim[o.ianim]) , o.i ), [o.fx,o.fy] )
                 o.ianim +=1
                 if o.ianim >= len(o.imganim): o.ianim = 0
-                
+              
     for o in blts:
         if o.fx >= 0-o.tx and o.fy-o.ty >= 0 and o.fx <= tetx and o.fy <= tety:
             if o.tpp==1:
@@ -615,15 +636,14 @@ def aff():
         if perso.ianim >= len(perso.imganim): perso.ianim = 0
     
     if affcarte:
-        cx=tetx-150
-        cy=20
+        
         pygame.draw.rect(fenetre,(20,25,20),(cx   ,cy   ,100,100),5)
         pygame.draw.rect(fenetre,(250,250,250),(cx   ,cy   ,100,100),0)
         for p in prs:
             pygame.draw.rect(fenetre,(200,0,0),(cx+p.px/(tmx/100)+50,cy+p.py/(tmy/100)+50,4,4),0)
         pygame.draw.rect(fenetre,(0,0,200),(cx+perso.px/(tmx/100)+50,cy+perso.py/(tmy/100)+50,4,4),0)
+   
     if affstats:
-        fon=pygame.font.SysFont("Comic Sans MS",20)
         fenetre.blit( pygame.image.load("images/fp.png"),[tetx-150,140] )
         fenetre.blit( fon.render( str( len( prs )+1 ) , 20 , (250,250,250) ) , [tetx-128,140] )
         fenetre.blit( pygame.image.load("images/pt.png"),[tetx-110,140] )
@@ -644,18 +664,22 @@ def aff():
             tbpy=10
             pygame.draw.rect( fenetre , (0,50,100) , (50+tbvx+10,70,aaa/perso.arme.ttirer*tbtx,tbpy) ,0)
             pygame.draw.rect( fenetre , (0,0,0) , (50+tbvx+10,70,tbtx,tbpy) ,2)
-            
-            
+  else:
+    fenetre.fill((150,25,100))
+    fenetre.blit( fon.render("Pause",40,(15,150,10)) , [50,50] )
+    
         
-        
-    pygame.display.update()
-    fpsClock.tick(fps)
+  fenetre.blit( fon.render("fps="+str(int(fpss)),40,(0,0,0)) , [50,200] )
+  pygame.display.update()
+  fpsClock.tick(fps)
+  #print("aff :"+str(time.time()-t1))
 
 
 def cm():
-    for x in range(int(-tmx/100),int(tmx/100)):
-        for y in range(int(-tmy/100),int(tmy/100)  ):
-            mape.append( Om(x*50,y*50,0) )
+    tmp=0
+    for x in range(int(-tmx/mtxx[tmp]),int(tmx/mtxx[tmp])):
+        for y in range(int(-tmy/mtyy[tmp]),int(tmy/mtyy[tmp])  ):
+            mape.append( Om(x*mtxx[tmp],y*mtyy[tmp],tmp) )
 
     while len(mapeop) < 0:
         wx,wy=random.randint(-100*100,100*100),random.randint(-100*100,100*100)
@@ -669,25 +693,28 @@ def cm():
     return mape,mapeop,prs
 
 def bb():
-    for p in prs:
-        ddf=["Up","Down","Left","Right"]
-        for x in range(10): ddf.append(p.sens)
-        p.bouger(random.choice(ddf))
-        if random.randint(1,5)==1:
-            if p.armsel == 1: p.arme.tirer()
-            else            : p.melee.att()
-        if random.randint(1,20)==1:
-            if p.armsel == 1: p.armsel = 2
-            else            : p.armsel = 1
+    #t1=time.time()
+    if time.time()-dvb > vb:
+        for p in prs:
+            ddf=["Up","Down","Left","Right"]
+            for x in range(10): ddf.append(p.sens)
+            p.bouger(random.choice(ddf))
+            if random.randint(1,5)==1:
+                if p.armsel == 1: p.arme.tirer()
+                else            : p.melee.att()
+            if random.randint(1,20)==1:
+                if p.armsel == 1: p.armsel = 2
+                else            : p.armsel = 1
+            if time.time()-p.drg > p.vitreg and p.vie < p.vietot: p.vie+=1
+        if time.time()-perso.drg > perso.vitreg and perso.vie < perso.vietot : perso.vie+=1
     for b in blts:
         b.bouger()
         b.detect()
+    #print("bb :"+str(time.time()-t1))
 #####################################################################################################################################
 
 
 totnbpartiesjoues=open("profil.nath","r").readlines()[2][:-1]
-
-pygame.init()
 
 fenetre=pygame.display.set_mode((tetx,tety))
 pygame.display.set_caption("TLBR","images/icontitle.png")
@@ -710,6 +737,7 @@ bm( [perso.fx-perso.px,perso.fy-perso.py] )
 inm=0
 
 while encour:
+    t1=time.time()
     for event in pygame.event.get():
         if   event.type == QUIT    : encour=False
         elif event.type == KEYDOWN :
@@ -724,12 +752,15 @@ while encour:
             elif event.key == K_z    :
                 if perso.armsel == 1 : perso.armsel = 2
                 else                 : perso.armsel = 1
+            elif event.key == K_p    : pause=not pause
     bb()
     aff()
     if perso.vie <= 0:
         time.sleep(1.5)
         break
     if len(prs) <= 0: break
+    fpss=abs(t1-time.time())*3600
+    #print("main :"+str(time.time()-t1))
 
 
 
