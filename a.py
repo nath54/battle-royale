@@ -13,7 +13,7 @@ dtan=time.time()
 vb=0.4
 dvb=time.time()
 
-tetx,tety=1300,1000
+tetx,tety=1280,1000
 
 nbprs=50
 tmx,tmy=4*1000,4*1000
